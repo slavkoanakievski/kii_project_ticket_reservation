@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Report for all routes</title>
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Float four columns side by side */
+        .column {
+            float: left;
+            width: 90%;
+            padding: 0 10px;
+            margin-left: 40px;
+        }
+
+        /* Remove extra left and right margins, due to padding */
+        .row {margin: 0 -5px;}
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive columns */
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+                display: block;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Style the counter cards */
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 16px;
+            text-align: center;
+            background-color: #f1f1f1;
+        }
+
+        th, td{
+            padding-left: 35px;
+        }
+
+
+
+
+        .kopcinja {
+            background: none!important;
+            border: none;
+            padding: 0!important;
+            /*optional*/
+            /*input has OS specific font-family*/
+            color: dodgerblue;
+
+            cursor: pointer;
+            margin-bottom: 50px;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+
+        </style>
+
+</head>
+<body>
+
+<button role="button" class="kopcinja" onclick="history.back()"><b>ВРАТИ СЕ НАЗАД</b></button>
+
+
+<div class="row">
+    <div class="column">
+        <div class="card">
+            <h3 >Извештај за вкупно резервации и сума на уплата по месец и година</h3>
+            <table style="margin-left: 210px">
+                <tbody>
+                <tr>
+                    <th>Месец</th>
+                    <th>Година</th>
+                    <th>Број на резервации</th>
+                    <th>Вкупна уплата во денари</th>
+                </tr>
+                <tr th:each="mg : ${profitMesecGodina}">
+                    <td th:text="${mg.getMesec()}"></td>
+                    <td th:text="${mg.getGodina()}"></td>
+                    <td th:text="${mg.getBroj_na_rezervacii()}"></td>
+                    <td th:text="${mg.getVkupna_uplata()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+<div class="row" style="margin-top: 50px">
+    <div class="column">
+        <div class="card">
+            <h3 >Извештај за број на резервации,сума на уплата и процент според рути</h3>
+            <table style="margin-left: 90px">
+                <tbody>
+                <tr>
+                    <th>Име на рута</th>
+                    <th>Број на купени карти</th>
+                    <th>Остварен приход во денари</th>
+                    <th>Процент од вкупната уплата</th>
+
+                </tr>
+                <tr th:each="ruta : ${izvestajSporedRuta}">
+
+                    <td th:text="${ruta.getIme_ruta()}"></td>
+                    <td th:text="${ruta.getBroj_kupeni_karti()}"></td>
+                    <td th:text="${ruta.getVkupno_mkd()}"></td>
+                    <td th:text="${ruta.getProcent_od_vkupna_uplata()}"></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>

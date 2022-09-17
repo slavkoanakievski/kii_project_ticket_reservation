@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Izvestai</title>
+    <style>
+        #izvestaiKorisnici{
+            width: 95%;
+            border-collapse: collapse;
+            font-size: 1.3em;
+            margin-bottom: 40px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        td{
+            text-align: center;
+        }
+
+        #izvestaiKorisnici tr:nth-child(even){background-color: beige;}
+
+        #izvestaiKorisnici tr:hover {background-color: #ddd;}
+
+        #izvestaiKorisnici th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: darkgray;
+            color: white;
+        }
+
+        #izvestaiKorisnici td {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        h1{
+            padding-top: 50px;
+            margin-left: 530px;
+        }
+
+        #button {
+            background: none!important;
+            border: none;
+            padding: 0!important;
+            /*optional*/
+            font-family: arial, sans-serif;
+            /*input has OS specific font-family*/
+            color: #069;
+            text-decoration: underline;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .columnd{
+            float: left;
+            width: 50%;
+            padding: 0 10px;
+        }
+
+
+
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        /* Float four columns side by side */
+        .column {
+            float: left;
+            width: 50%;
+            padding: 0 10px;
+        }
+
+        /* Remove extra left and right margins, due to padding */
+        .row {margin: 0 -5px;}
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Responsive columns */
+        @media screen and (max-width: 600px) {
+            .column {
+                width: 100%;
+                display: block;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Style the counter cards */
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 16px;
+            text-align: center;
+            background-color: #f1f1f1;
+        }
+
+
+        #levo{
+            margin-left: 220px;
+        }
+
+    </style>
+</head>
+<body>
+<div style="margin-bottom: 40px; margin-left: 10px; font-weight: bold">
+<a role="button" href="/chooseRole">Врати се на "Избери улога" страната</a>
+</div>
+
+<div>
+    <div class="columnd">
+  <a role="button" href="/prikaziRutizvestaj" id="levo"><b>Прикажи извештаи според автобуски рути</b></a>
+    </div>
+    <div class="columnd">
+    <a role="button" href="/addUserForm"><b>Додади нов корисник</b></a>
+    </div>
+</div>
+
+<h1>ИЗВЕШТАИ</h1>
+
+<!--DA PRIKAZES NAJGORE ZA MAZHI I ZHENI PROCENT KOJ KOLKU PATUVAL!-->
+
+
+<div class="row">
+    <div class="column">
+        <div class="card">
+            <h3 >Процент на патувања според полот на патникот</h3>
+            <p th:text="'Maжи: '+${mazi.getProcent_od_vkupen_broj_patuvanja()}"></p>
+            <p th:text="'Жени: '+${zeni.getProcent_od_vkupen_broj_patuvanja()}"></p>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <h3 >Процент од вкупната уплатена сума за патувања</h3>
+            <p th:text="'Maжи: '+${mazi.getProcent_od_vkupno_uplatena_suma()}"></p>
+            <p th:text="'Жени: '+${zeni.getProcent_od_vkupno_uplatena_suma()}"></p>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<table id="izvestaiKorisnici">
+    <tbody>
+    <tr style="font-weight: bold">
+        <th><b>Име на патник</b></th>
+        <th><b>ЕМБГ</b></th>
+        <th><b>Број на резервации</b></th>
+        <th><b>Вкупна уплата</b></th>
+        <th><b>Прикажи резервации</b></th>
+
+        <br>
+    </tr>
+
+    <tr th:each="rez : ${rezervaciiSporedUser}"  style="padding: 20px" >
+        <td th:text="${rez.getIme_patnik()}" ></td>
+        <td th:text="${rez.getPatnik_embg()}"></td>
+        <td th:text="${rez.getBroj_na_rezervacii()}"></td>
+        <td th:text="${rez.getVkupno_uplata()}"></td>
+
+        <form th:action="@{'/allReservationsUser'}" th:method="get" >
+
+        <td>
+            <input hidden  type="text" name="embg"  th:value="${rez.getPatnik_embg()}">
+            <input id="button" type="submit" value="Прикажи ги резервациите">
+        </td>
+
+        </form>
+    </tr>
+
+    </tbody>
+</table>
+
+</body>
+</html>

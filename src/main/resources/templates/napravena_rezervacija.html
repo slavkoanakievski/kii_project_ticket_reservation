@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<head>
+    <meta charset="UTF-8">
+    <title>  Reserved Ticket</title>
+
+    <style>
+        #rezervacija{
+            width: 60%;
+            position: center;
+            list-style-type: none;
+            border: 2px solid gray;
+            background: beige;
+            margin-left: 200px;
+        }
+        #rezervacija li, #rezervacija div{
+            font-weight: bold;
+            padding-left: 50px;
+            padding-top: 10px;
+            font-size: 1.2em;
+        }
+
+        h1{
+            color: darkslategrey;
+            margin-top: 30px;
+            margin-left: 200px;
+        }
+        #nazadDoStanici{
+            margin-left: 15px;
+            font-weight: bold;
+             }
+        #siteRezervacii{
+            margin-left: 15px;
+        }
+
+       #siteRezervaciiKopce  {
+            background: none!important;
+            border: none;
+            padding: 0!important;
+            /*optional*/
+            /*input has OS specific font-family*/
+            color: dodgerblue;
+            text-decoration: none;
+            cursor: pointer;
+           font-weight: bold;
+           font-size: 1em;
+        }
+
+    </style>
+</head>
+<body>
+
+<a role="button" id="nazadDoStanici" href="/home">НАЗАД ДО АВТОБУСКИТЕ СТАНИЦИ</a>
+
+<form id="siteRezervacii" th:method="get" th:action="@{'/allReservationsUser'}">
+
+<input id="siteRezervaciiKopce" class="btn btn-primary btn-sm"
+       type="submit"  value="ПРИКАЖИ ГИ СИТЕ МОИ НАПРАВЕНИ РЕЗЕРВАЦИИ">
+
+</form>
+<h1>УСПЕШНА РЕЗЕРВАЦИЈА &#x2705; </h1>
+
+
+
+
+
+    <ul id="rezervacija" th:each="rez : ${session.rezervacii}"  style="padding: 20px">
+            <div>ПОДАТОЦИ ЗА РЕЗЕРВАЦИЈА</div>
+            <br>
+            <li th:text="'Име на патник:'+' '+${rez.getIme_patnik()}">Име на рута</li>
+            <li th:text="'EMBG патник:'+' '+${rez.getEmbg()}">ЕМБГ</li>
+            <li th:text="'Пол:'+' '+${rez.getPol_patnik()}">Пол патник</li>
+            <li th:text="'Контакт:'+' '+${rez.getKontakt_patnik()}">Контакт</li>
+            <li th:text="'Број на седиште:'+' '+${rez.getBroj_sedste()}">Број на седиште</li>
+            <li th:text="'Цена на карта:'+' '+${rez.getCena_karta()}">Цена на карта</li>
+
+            <li th:text="'Патува од:'+' '+${rez.getPatuva_od()}">Патува од</li>
+            <li th:text="'Патува до:'+' '+${rez.getPatuva_do()}">Патува до</li>
+            <li th:text="'Тргнување:'+' '+${rez.#temporals.format(rez.getVreme_trgnuvanje(), 'dd-MM-yyyy HH:mm')}">Време тргнување</li>
+            <li th:text="'Пристигнување:'+' '+${rez.#temporals.format(rez.getVreme_pristignuvanje(), 'dd-MM-yyyy HH:mm')}">Време пристигнување</li>
+
+    </ul>
+
+
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose admin or User page</title>
+    <style>
+        form{
+            padding-top: 30px;
+            margin-left: 450px;
+        }
+
+    </style>
+</head>
+<body>
+<div style="margin-top: 170px">
+<!--da vrati home html ili nekoja admin izvestai vo zavisnost so birame od select tagot-->
+<form id="fristForm" th:action="@{'/home'}">
+    <label for="user">Избери корисник:</label>
+    <select onchange="this.form.submit()" name="chosenUser" id="user">
+        <option selected hidden disabled>Избери корисник...</option>
+    <option  th:each="p : ${patnici}"
+            th:value="${p.getIme_patnik()}"
+            th:text="${p.getIme_patnik()}"></option>
+</select>
+</form>
+
+<form  th:action="@{'/adminIzvestai'}" th:method="GET">
+    <label for="user">Избери админ:</label>
+
+    <select onchange="this.form.submit()">
+        <option selected hidden disabled>Избери админ...</option>
+        <option>admin</option>
+    </select>
+</form>
+</div>
+</body>
+</html>

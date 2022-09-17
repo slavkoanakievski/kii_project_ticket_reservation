@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservation form</title>
+
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+        * {box-sizing: border-box;}
+
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        input[type=submit] {
+            background-color: #04AA6D;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h3>Форма за резервација</h3>
+
+    <div class="container">
+        <form th:action="@{'/reserve'}" th:method="POST">
+            <label for="embg">ЕМБГ</label>
+            <input  type="text" id="embg" name="embg" placeholder="Внеси го матичниот број...">
+
+            <label for="broj_sediste">Број на седиште</label>
+            <input type="text" id="broj_sediste" name="broj_sediste" placeholder="Внеси број на седиште...">
+
+            <label for="ime_ruta">Име на рута</label>
+            <input readonly type="text" id="ime_ruta" name="ime_ruta" th:value="${ruta.getIme_ruta()}">
+
+            <label for="patuva_od">Почетна дестинација</label>
+            <input readonly type="text" id="patuva_od" name="patuva_od" th:value="${patuva_od}">
+
+            <label for="patuva_do">Крајна дестинација</label>
+            <input readonly type="text" id="patuva_do" name="patuva_do" th:value="${patuva_do}">
+
+            <label for="cena1">Цена на карта (во денари)</label>
+            <input readonly type="text" id="cena1" name="cena1" th:value="${cena}">
+
+            <input readonly  type="text" id="id_ruta" name="id_ruta" th:value="${ruta.getId_ruta()}">
+
+
+            <input type="submit" value="Резервирај">
+
+        </form>
+    </div>
+
+</body>
+</html>

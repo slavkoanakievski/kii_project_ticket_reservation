@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        #bus_lines{
+            width: 100%;
+            border-collapse: collapse;
+            height: 80%;
+            font-size: 1.4em;
+            margin-top: 70px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        td{
+            text-align: center;
+        }
+        #bus_lines tr:nth-child(even){background-color: #f2f2f2;}
+
+        #bus_lines tr:hover {background-color: #ddd;}
+
+        #bus_lines th {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            text-align: center;
+            background-color: darkgrey;
+            color: white;
+        }
+        #bus_lines td {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div style="margin-bottom: 40px; margin-left: 10px; font-weight: bold">
+    <a role="button"  href="/chooseRole">Врати се на "Избери улога" страната</a>
+</div>
+
+<table id="bus_lines">
+<tbody>
+<tr style="font-weight: bold">
+    <th><b>Име на станица</b></th>
+    <th><b>Град</b></th>
+    <th><b>Детали за автобуска станица</b></th>
+</tr>
+
+<tr th:each="as: ${avtobuski_stanici}"  style="padding: 20px">
+    <td th:text="${as.getIme_stanica()}">Име на станица</td>
+    <td th:text="${as.getGrad()}">Град</td>
+    <td style="text-align: center"> <a  style="font-weight: bold" class="btn btn-primary btn-sm" th:href="@{'/routes/{id}' (id=${as.getId_stanica()})}" >Прикажи рути од оваа станица</a> </td>
+    <td><br></td>
+</tr>
+
+</tbody>
+</table>
+</body>
+</html>

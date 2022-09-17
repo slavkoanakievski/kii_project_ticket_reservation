@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Routes</title>
+
+    <style>
+        #routes{
+            width: 100%;
+            border-collapse: collapse;
+            height: 80%;
+            font-size: 1.4em;
+            margin-top: 70px;
+
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        td{
+            text-align: center;
+        }
+
+        #routes tr:nth-child(even){background-color: #f2f2f2;}
+
+        #routes tr:hover {background-color: #ddd;}
+
+        #routes th {
+            padding-top: 15px;
+            padding-bottom: 15px;
+            text-align: center;
+            background-color: darkgrey;
+            color: white;
+        }
+
+        #routes td {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div style="margin-bottom: 40px; margin-left: 10px; font-weight: bold">
+    <a style="text-decoration: none; font-size: 1.4em" href="/home">Врати се на приказ на автобуски станици</a>
+</div>
+
+<table id="routes">
+    <tbody>
+    <tr style="font-weight: bold">
+        <th><b>Име на рута</b></th>
+        <th><b>Цена на карта</b></th>
+        <th><b>Време на тргнување</b></th>
+        <th><b>Време на пристигнување</b></th>
+        <th><b>Времетраење на возењето</b></th>
+        <th><b>Број на запирања</b></th>
+        <th><b>Купување карта</b></th>
+        <br>
+    </tr>
+
+<tr th:each="r: ${allRoutesById}"  style="padding: 20px">
+
+    <form th:method="POST" th:action="@{'/reserve-form/{id}/{id_stanica}/{cena}' (id=${r.getId_ruta()}, id_stanica=${stanica.getId_stanica()},
+    cena=${r.getCena_karta()})}">
+
+    <td th:text="${r.getIme_ruta()}">Име на рута</td>
+    <td th:value="${r.getCena_karta()}" th:text="${r.getCena_karta()}">Име на рута</td>
+    <td th:text="${r.#temporals.format(r.getVreme_trgnuvanje(), 'dd-MM-yyyy HH:mm')}"></td>
+    <td th:text="${r.#temporals.format(r.getVreme_pristignuvanje(), 'dd-MM-yyyy HH:mm')}"></td>
+        <td th:text="${r.getVremetraenje_na_vozenjeto()}">Име на рута</td>
+        <td th:text="${r.getBroj_na_zapiranja()}">Име на рута</td>
+
+        <td style="text-align: center">
+
+
+            <input class="btn btn-primary mb-2" type="submit" value="Резервирај карта">
+        </form>
+
+
+    </td>
+
+<!--    <div hidden th:name="cena" th:value="${r.getCena_karta()}" th:text="${r.getCena_karta()}"></div>-->
+
+    <td><br></td>
+</tr>
+
+    </tbody>
+</table>
+
+</body>
+</html>

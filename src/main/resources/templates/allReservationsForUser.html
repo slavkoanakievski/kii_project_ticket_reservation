@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<head>
+    <meta charset="UTF-8">
+    <title>All Reservations for User</title>
+    <style>
+        #userReservations{
+            width: 94%;
+            border-collapse: collapse;
+            height: 80%;
+            font-size: 1.4em;
+            margin-left: 40px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        td{
+            text-align: center;
+        }
+
+        #userReservations tr:nth-child(even){background-color: linen;}
+
+        #userReservations tr:hover {background-color: #ddd;}
+
+        #userReservations th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: darkgray;
+            color: white;
+        }
+
+        #userReservations td {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        h1{
+            padding-top: 50px;
+            margin-left: 350px;
+        }
+
+        .kopcinja {
+            background: none!important;
+            border: none;
+            padding: 0!important;
+            /*optional*/
+            /*input has OS specific font-family*/
+            cursor: pointer;
+            color: dodgerblue;
+
+        }
+    </style>
+
+</head>
+<body>
+<a role="button" class="kopcinja" id="nazadDoStanici" href="/home"><b>НАЗАД ДО АВТОБУСКИТЕ СТАНИЦИ</b></a><br>
+<a style="color: dodgerblue;;" role="button" class="kopcinja" onclick="history.back()"><b>ВРАТИ СЕ НАЗАД</b></a>
+
+<h1>ALL RESERVATIONS FOR USER</h1>
+
+<table id="userReservations">
+<tbody>
+<tr style="font-weight: bold">
+    <th><b>Име на патник</b></th>
+    <th><b>ЕМБГ</b></th>
+    <th><b>Пол</b></th>
+    <th><b>Контакт</b></th>
+    <th><b>Број на седиште</b></th>
+    <th><b>Цена на карта</b></th>
+    <th><b>Патува од</b></th>
+    <th><b>Патува до</b></th>
+    <th><b>Време тргнување</b></th>
+    <th><b>Време пристигнување</b></th>
+
+    <br>
+</tr>
+<tr th:each="rez : ${usersReservations}"  style="padding: 20px">
+
+
+    <td th:text="${rez.getIme_patnik()}"></td>
+    <td th:text="${rez.getEmbg()}"></td>
+    <td th:text="${rez.getPol_patnik()}"></td>
+    <td th:text="${rez.getKontakt_patnik()}"></td>
+    <td th:text="${rez.getBroj_sedste()}"></td>
+<!--    <td th:text="${session.karta.getCena_karta()}"></td>-->
+    <td th:text="${rez.getCena_karta()}"></td>
+
+
+    <td th:text="${rez.getPatuva_od()}"></td>
+
+
+    <td th:text="${rez.getPatuva_do()}"></td>
+    <td th:text="${rez.#temporals.format(rez.getVreme_trgnuvanje(), 'dd-MM-yyyy HH:mm')}"></td>
+    <td th:text="${rez.#temporals.format(rez.getVreme_pristignuvanje(), 'dd-MM-yyyy HH:mm')}"></td>
+
+</tr>
+
+</tbody>
+</table>
+
+</body>
+</html>
