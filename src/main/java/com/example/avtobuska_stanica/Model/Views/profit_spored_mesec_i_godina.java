@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 @Entity
 @Immutable
-@Table(name = "profit_spored_mesec_i_godina")
+@Table(name = "profit_spored_mesec_i_godina", schema="avtobuskastanica")
 @IdClass(profit_spored_mesec_i_godina_composite_key.class)
 public class profit_spored_mesec_i_godina {
 

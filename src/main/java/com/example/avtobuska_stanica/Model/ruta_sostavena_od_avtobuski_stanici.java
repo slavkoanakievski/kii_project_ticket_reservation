@@ -7,6 +7,7 @@ import lombok.Data;
 import javax.persistence.*;
 @Entity
 @Data
+@Table(name = "ruta_sostavena_od_avtobuski_stanici", schema="avtobuskastanica")
 public class ruta_sostavena_od_avtobuski_stanici {
     @EmbeddedId
     RutaAvtobuskaKey id;

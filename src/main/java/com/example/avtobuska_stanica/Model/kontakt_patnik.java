@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @IdClass(kontakt_patnik_id.class)
-@Table(name = "kontakt_patnik")
+@Table(name = "kontakt_patnik", schema="avtobuskastanica")
 public class kontakt_patnik {
     @Id
     @ManyToOne

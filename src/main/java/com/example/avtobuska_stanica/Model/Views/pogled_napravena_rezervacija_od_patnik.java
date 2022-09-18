@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Immutable
-@Table(name = "pogled_napravena_rezervacija_od_patnik")
+@Table(name = "pogled_napravena_rezervacija_od_patnik", schema="avtobuskastanica")
 @IdClass(detalen_prikaz_karta_info_composite_key.class)
 public class pogled_napravena_rezervacija_od_patnik {
 

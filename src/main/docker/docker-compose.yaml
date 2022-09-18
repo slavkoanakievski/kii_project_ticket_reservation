@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  app:
+    image: avtobuska_stanica
+    container_name: app
+    networks:
+      - order-pgsql
+    build:
+      context: ../../../
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres?currentSchema=avtobuskastanica
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres111
+  db:
+    image: 'postgres:latest'
+    networks:
+      - order-pgsql
+    container_name: db
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USERNAME: postgres
+      POSTGRES_PASSWORD: postgres111
+networks:
+  order-pgsql:

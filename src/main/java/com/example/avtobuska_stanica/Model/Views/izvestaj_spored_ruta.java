@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Immutable
-@Table(name = "izvestaj_spored_ruta")
+@Table(name = "izvestaj_spored_ruta", schema="avtobuskastanica")
 public class izvestaj_spored_ruta {
 
     @Id

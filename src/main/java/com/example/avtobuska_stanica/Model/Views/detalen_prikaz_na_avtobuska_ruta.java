@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Immutable
-@Table(name = "detalen_prikaz_na_avtobuska_ruta")
+@Table(name = "detalen_prikaz_na_avtobuska_ruta", schema="avtobuskastanica")
 @IdClass(detalen_prikaz_ruta_composite_key.class)
 public class detalen_prikaz_na_avtobuska_ruta {
     @Id

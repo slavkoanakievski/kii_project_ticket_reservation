@@ -5,9 +5,11 @@ import org.hibernate.annotations.Immutable;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Immutable
+@Table(name = "lista_site_avtobuski_stanici", schema="avtobuskastanica")
 public class lista_site_avtobuski_stanici {
 
     @Id

@@ -1,6 +1,5 @@
 package com.example.avtobuska_stanica.Model;
 import lombok.Data;
-import org.hibernate.annotations.Nationalized;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "patnik")
+@Table(name = "patnik", schema="avtobuskastanica")
 public class patnik {
     @Id
     private String embg;

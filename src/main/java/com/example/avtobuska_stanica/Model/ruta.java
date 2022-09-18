@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "ruta")
+@Table(name = "ruta", schema="avtobuskastanica")
 public class ruta {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

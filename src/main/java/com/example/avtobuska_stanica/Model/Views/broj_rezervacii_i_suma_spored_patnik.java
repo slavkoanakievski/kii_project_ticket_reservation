@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Immutable
-@Table(name = "broj_rezervacii_i_suma_spored_patnik")
+@Table(name = "broj_rezervacii_i_suma_spored_patnik", schema="avtobuskastanica")
 public class broj_rezervacii_i_suma_spored_patnik {
 
     @Id

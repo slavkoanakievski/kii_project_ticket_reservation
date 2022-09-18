@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Immutable
-@Table(name = "procent_mazi_i_zeni_patuvanja")
+@Table(name = "procent_mazi_i_zeni_patuvanja", schema="avtobuskastanica")
 public class procent_mazi_i_zeni_patuvanja {
 
     @Id
